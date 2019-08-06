@@ -1,0 +1,53 @@
+DOCUMENTATION 
+
+CODE FLOW:
+
+> Open and execute remote_UI (click F5) 
+> Launches the UI
+> Enter the Remote Details if it is a new remote and click on "new remote" button.
+  Or if you want to access the latest remote click on "previous remote" button
+> Once a remote is selected click on "Calculate Frequency" button. This will call a funtion from calculate_frequency library
+		> freq()
+		  This calls funtions from freq_calc library
+			> initialises the pigpio library
+			> enable()
+			> _analyse_ir_pulses()
+		  Returns the frequency
+> The frequency is displays in the UI
+> Once you click on any button on the remote part of the UI, click on the curresponding button on your remote
+> The decode starts :
+		> assign()
+			> code()	(from IR_Deocde)
+			This calls funtions from Decoder
+				> Initialises the pigpio connection
+				> enable()
+				> _analyse_ir_pulses()
+			returns the Code of the IR signal
+			> create_insert()	(from db_lib)
+			  This inserts the code along with its key code, protocol and remote_id
+			> toggle_()		(from remote_UI)
+			  This checks if that remote has a toggle code.
+			  It updates the remotes table
+			  		> remote_db()	(from db_lib)
+			> online_check() 	(from remote_UI)
+			  obtains the remotes which have the code obtained from the online db
+			  		> online_remote_check() 		(from db_lib)
+			  		  returns the code curresponding to the key_code from the online_Remote_ID from tv.db
+			  This code is compared with the decoded code
+
+			> Once three such matches are obtained, an autoupdate option is enabled
+		 the result is displayed in the UI
+> If the user clicks on "AUTO UPDATE" button
+		> Only after three matches it will update the remote
+		> popup_() 		(from remote_UI)
+		> get() 	(from remote_UI)
+		> auto_update() 	(from remote_UI)
+		> if the remote is auto complete ready:
+				> auto_complete()	(from db_lib)
+				> existing_remote_update() 	(from db_lib)
+				> If the user wants to edit the autoupdated remote, you can add or remove any key from the remote bu clicking on the "ADD KEY" and "REMOVE KEY" buttons
+		> the status of the auto update is displayed in the UI
+
+> If the user is not satisfied with any existing remote or if there is no remote available, then the user should click on "UPDATE NEW REMOTE" button.
+	This will update the records of the current remote as a new remote
+> Once the remote is decoded and saved, the user can decode a new remote by entering the name of the new remote and clicking on the "new remote" button or close the UI by clicking on the "CLOSE REMOTE" button

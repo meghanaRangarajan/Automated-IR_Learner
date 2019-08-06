@@ -1,0 +1,23 @@
+DOCUMENTATION
+
+USER MANUAL
+
+> Open and Execute remote_UI. (Click on F5)
+> Access the remote you were decoding by clicking on "previous remote" button.
+  Or to create a new remote enter the name of the remote and click on "new remote" button.   
+> Click on the "calculate frequency" button. 
+> Once the frequency is calclated, click on any button on the remote side of the UI and click the curresponding button on your remote
+> Once the decode is done, the result is displayed in the result text box.
+> This way you can decode the entire remote 
+> If an existing remote is present, then the keys will be displayed in the KEYS FOUND box.
+  If you want to verify the remote, try decoding some more keys. A message will show up in the AUTO UPDATE STATUS box if there is a match found or not.
+  If the keys are satisfactory, you can click on "AUTO UPDATE" button.   
+> If the user is not satisfied with an existing remote or if no other remote is found, the user has to manually decode all the keys ont he remote and click on "UPDATE NEW REMOTE" button.
+>  Once the remote is decoded and saved, the user can decode a new remote by entering the name of the new remote and clicking on the "new remote" button or close the UI by clicking on the 
+   "CLOSE REMOTE" button
+
+
+If there is any problem with the deocde, i.e. if it is taking a very long time open the Python Shell where remote_UI is running, click on "Ctrl+c".
+Go through the buffer appearing right after the message reading "cleaning".
+compare the constants with the constants in the const.py file. If it doesn't match with any of the constants of any protocol there, it means this remote has a new protocol. You can study that buffer to define the protocol
+Once the protocol is defined, go to "Decoder.py" and the protocol along wiht the other protocols

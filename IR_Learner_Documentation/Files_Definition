@@ -1,0 +1,68 @@
+DOCUMENTATION 
+
+FILES:
+
+remote_UI.py:
+	libraries used:
+		tkinter : To create the User Interface
+		pigpio : to obtain the timing information of the IR signal
+			(version number -> 1.64-1)
+		urlopen : To search for the remotes with the code
+
+		db_lib : library with the funtions to access, edit, close databases
+		IR_Decode : library with funtions to decode the IR signal
+		calculate_frequency : library with functions to calculate the frequency of the carrier signal of the IR_Signal
+
+	This Py file is when run launches the user interface which is used to record the codes.
+
+db_lib.py:
+	libraries used:
+		sqlite3 : To access a database
+			(version number -> 3.16.2-5)
+
+	This Py file has various funtions used to access database, edit it, print the items in the database
+
+IR_Decode.py:
+	libraries used:
+		Decoder : It contains the functions which are used to obtain the timing
+			 	information of the IR signal using pigpio and sort it into protocols and decode the signal
+	This Py file is used to obtain the code of the IR signal and the Protocol it uses
+
+calculate_frequency.py:
+	libraries used:
+		freq_calc : It contains the funtions which are used to calculate the frequency
+				of the carrier signal of the IR signal
+	This Py file is used to obtain the frequency of the carrier signal used in the IR signal
+
+Decoder.py:
+	libraries used:
+		pigpio : to obtain the timing information of the IR signal
+			(version number -> 1.64-1)
+		asyncio :  To take care of multithreading
+		const : A file that contains the timing information of each protocol
+		clean_buffer : It contains funtions to edit the raw buffer to get a more 
+			accurate number of frequency cycles of the IR signal
+	This PY file contains the functions which are used to obtain the timing
+	information of the IR signal using pigpio and sort it into protocols and decode the signal
+
+freq_calc.py:
+	libraries used:
+		pigpio : to obtain the timing information of the IR signal
+			(version number -> 1.64-1)
+		asyncio :  To take care of multithreading
+	This Py file contains the funtions which are used to calculate the frequency
+	of the carrier signal of the IR signal
+
+const.py:
+	This Py file contains the constants of each protocol defining the number of frequency cycles in the marks and spaces present in the signal
+
+clean_buffer.py:
+	It contains funtions to edit the raw buffer to get a more accurate number of frequency cycles of the IR signal
+
+codes.db:
+	It is the local db which gets updated everytime a code is captured and decoded
+
+tv.db:
+	it is the local db which is referred to to get the the codes of an existing remote
+
+
